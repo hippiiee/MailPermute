@@ -1,7 +1,7 @@
 import aiohttp
 import argparse
 import asyncio
-from checkers import gmail, yahoo
+from checkers import gmail, yahoo, yandex
 from rich.progress import Progress
 import sys
 
@@ -58,7 +58,7 @@ async def print_results(checker, target, session):
 
 async def main():
     args = parse_args()
-    checkers = [gmail, yahoo]
+    checkers = [gmail, yahoo, yandex]
 
     if args.name:
         name_parts = args.name.lower().split()
