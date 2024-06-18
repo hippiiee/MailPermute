@@ -47,6 +47,8 @@ async def code250(mailProvider, target, timeout=10):
         pass
     except Exception as e:
         error = str(e)
+    finally:
+        await server.quit()
 
     return providerLst, error
 
@@ -73,7 +75,7 @@ async def yahoo(target, req_session_fun, *args, **kwargs) -> Dict:
     yahooPOST = {"acrumb": "AUeQM4bw", "sessionIndex": "Qg--", "userId": target}
 
     try:
-        yahooChk = await req_session_fun.post(yahooURL, headers=headers, cookies=yahooCookies, data=yahooPOST, timeout=kwargs.get('timeout', 5))
+        yahooChk = await req_session_fun.post(yahooURL, headers=headers, cookies=yahooCookies, data=yahooPOST, timeout=kwargs.get('timeout', 10))
 
         body = await yahooChk.text()
         if '"IDENTIFIER_EXISTS"' in body:
