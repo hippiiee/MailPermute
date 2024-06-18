@@ -11,6 +11,7 @@
 Find valid email from different providers:
   - [x] Gmail
   - [x] Yahoo
+  - [x] Yandex
 ## Requirements
 
 ```bash
