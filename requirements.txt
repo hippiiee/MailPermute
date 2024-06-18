@@ -1,0 +1,4 @@
+aiohttp==3.9.5
+aiosmtplib==3.0.1
+dnspython==2.6.1
+rich==13.7.1
