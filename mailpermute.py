@@ -58,7 +58,8 @@ async def print_results(checker, target, session):
 
 async def main():
     args = parse_args()
-    checkers = [gmail, yahoo, yandex]
+    #checkers = [gmail, yahoo, yandex]
+    checkers = [gmail]
 
     if args.name:
         name_parts = args.name.lower().split()
@@ -75,6 +76,8 @@ async def main():
                         *[print_results(checker, target, session) for checker in checkers]
                     )
                     await jobs
+            #await session.close()
+
     else:
         print('Help: ./mailpermute -h')
         sys.exit(1)
@@ -84,3 +87,4 @@ if __name__ == '__main__':
   print(banner)
   loop = asyncio.new_event_loop()
   loop.run_until_complete(main())
+
