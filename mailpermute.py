@@ -42,6 +42,7 @@ def parse_args():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     parser.add_argument("-n", "--name", default=None, help='Name of the person (e.g. "John Doe")')
+    parser.add_argument("-c", "--checkers", default=None, help='Checkers to use (e.g. "gmail, yandex"). Default: use all.')
     args = parser.parse_args()
     
     return args
@@ -58,23 +59,36 @@ async def print_results(checker, target, session):
 
 async def main():
     args = parse_args()
-    checkers = [gmail, yahoo, yandex]
+    all_checkers = [gmail, yahoo, yandex]
+    checkers = []
 
     if args.name:
         name_parts = args.name.lower().split()
         if len(name_parts) != 2:
             print('Error: The name must consist of exactly two parts (e.g. "John Doe").')
             sys.exit(1)
-        async with aiohttp.ClientSession() as session:
-            email_permutations = gen_permutations(name_parts[0], name_parts[-1])
-            with Progress() as progress:
-                task = progress.add_task("[green]Testing permutations...", total=len(email_permutations))
-                for target in email_permutations:
-                    progress.update(task, description=f"[green]Testing {target}", advance=1)
-                    jobs = asyncio.gather(
-                        *[print_results(checker, target, session) for checker in checkers]
-                    )
-                    await jobs
+        if args.checkers:
+            selected_checkers = args.checkers.lower().split(',')
+            for chk in selected_checkers:
+                checker_func = next((c for c in all_checkers if c.__name__ == chk), None)
+                if checker_func:
+                    checkers.append(checker_func)
+                else:
+                    print(f"Error: The checker {chk} does not exist.")
+                    sys.exit(1)
+        else:
+            checkers = all_checkers 
+        if len(checkers) > 0:
+            async with aiohttp.ClientSession() as session:
+                email_permutations = gen_permutations(name_parts[0], name_parts[-1])
+                with Progress() as progress:
+                    task = progress.add_task("[green]Testing permutations...", total=len(email_permutations))
+                    for target in email_permutations:
+                        progress.update(task, description=f"[green]Testing {target}", advance=1)
+                        jobs = asyncio.gather(
+                            *[print_results(checker, target, session) for checker in checkers]
+                        )
+                        await jobs
 
     else:
         print('Help: ./mailpermute -h')
