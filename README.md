@@ -31,7 +31,7 @@ $ python3 mailpermute.py -h
 888  Y8P  888 .d888888 888 888 888  888 88888888 888     888  888  888 888  888 888   88888888 
 888   "   888 888  888 888 888 888 d88P Y8b.     888     888  888  888 Y88b 888 Y88b. Y8b.     
 888       888 "Y888888 888 888 88888P"   "Y8888  888     888  888  888  "Y88888  "Y888 "Y8888  
-                               888 v0.7                                                       
+                               888 v1.0                                                       
                                888                                                             
                                888                                                             
 By Hippie | https://twitter.com/hiippiiie
@@ -65,3 +65,11 @@ $ ./mailpermute.py -n "Hippolyte Quere"
 [+] hippolyteq@gmail.com
 
 ```
+
+## How does it works ?
+
+Mailpermute first creates different permutations from the name provided by the user. It creates permutations adding '-' '_' (note that mailpermute does not add '+' or '.' which can be added to any valid mail not changing the mail itself). Then Mailpermute is sending request to different providers to verify if the mail exist.
+
+Feel free to contribute if you want to add more checkers to the tool !
+
+*Project inspired from [Mailcat](https://github.com/sharsil/mailcat)*

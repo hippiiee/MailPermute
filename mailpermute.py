@@ -5,7 +5,7 @@ from checkers import gmail, yahoo, yandex, duckduckgo
 from rich.progress import Progress
 import sys
 
-version_number = "0.7"
+version_number = "1.0"
 
 banner = f"""\x1b[0;33m
 888b     d888          d8b 888                                                  888            
@@ -99,4 +99,3 @@ if __name__ == '__main__':
   print(banner)
   loop = asyncio.new_event_loop()
   loop.run_until_complete(main())
-
