@@ -5,7 +5,7 @@ from checkers import gmail, yahoo, yandex
 from rich.progress import Progress
 import sys
 
-version_number = "0.5"
+version_number = "0.7"
 
 banner = f"""\x1b[0;33m
 888b     d888          d8b 888                                                  888            
@@ -42,7 +42,7 @@ def parse_args():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     parser.add_argument("-n", "--name", default=None, help='Name of the person (e.g. "John Doe")')
-    parser.add_argument("-c", "--checkers", default=None, help='Checkers to use (e.g. "gmail, yandex"). Default: use all.')
+    parser.add_argument("-c", "--checkers", default="all", help='Checkers to use (e.g. "gmail, yandex")')
     args = parser.parse_args()
     
     return args
@@ -67,7 +67,7 @@ async def main():
         if len(name_parts) != 2:
             print('Error: The name must consist of exactly two parts (e.g. "John Doe").')
             sys.exit(1)
-        if args.checkers:
+        if args.checkers != 'all':
             selected_checkers = args.checkers.lower().split(',')
             for chk in selected_checkers:
                 checker_func = next((c for c in all_checkers if c.__name__ == chk), None)

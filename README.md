@@ -20,7 +20,7 @@ pip3 install -r requirements.txt
 ## Usage
 
 ```
-$ python3 mailpermute.py -h                      
+$ python3 mailpermute.py -h
 
 888b     d888          d8b 888                                                  888            
 8888b   d8888          Y8P 888                                                  888            
@@ -30,18 +30,24 @@ $ python3 mailpermute.py -h
 888  Y8P  888 .d888888 888 888 888  888 88888888 888     888  888  888 888  888 888   88888888 
 888   "   888 888  888 888 888 888 d88P Y8b.     888     888  888  888 Y88b 888 Y88b. Y8b.     
 888       888 "Y888888 888 888 88888P"   "Y8888  888     888  888  888  "Y88888  "Y888 "Y8888  
-                               888 v0.5                                                       
+                               888 v0.7                                                       
                                888                                                             
                                888                                                             
 By Hippie | https://twitter.com/hiippiiie
 
 usage: mailpermute.py [-h] [-n NAME]
+                      [-c CHECKERS]
 
 options:
-  -h, --help            show this help message and
-                        exit
+  -h, --help            show this help message
+                        and exit
   -n NAME, --name NAME  Name of the person (e.g.
-                        "John Doe") (default: None)
+                        "John Doe") (default:
+                        None)
+  -c CHECKERS, --checkers CHECKERS
+                        Checkers to use (e.g.
+                        "gmail, yandex")
+                        (default: all)
 ```
 
 ## Example output
