@@ -9,6 +9,7 @@
 
 ## Features
 Find valid email from different providers:
+  - [x] DuckDuckGo
   - [x] Gmail
   - [x] Yahoo
   - [x] Yandex
