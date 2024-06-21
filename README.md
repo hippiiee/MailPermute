@@ -13,11 +13,13 @@ Find valid email from different providers:
   - [x] Gmail
   - [x] Yahoo
   - [x] Yandex
+
 ## Requirements
 
 ```bash
 pip3 install -r requirements.txt
 ```
+
 ## Usage
 
 ```
@@ -52,6 +54,7 @@ options:
 ```
 
 ## Example output
+
 ```
 $ ./mailpermute.py -n "Hippolyte Quere"
 
