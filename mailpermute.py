@@ -5,7 +5,7 @@ from checkers import gmail, yahoo, yandex, duckduckgo
 from rich.progress import Progress
 import sys
 
-version_number = "1.0"
+version_number = "1.1"
 
 banner = f"""\x1b[0;33m
 888b     d888          d8b 888                                                  888            
@@ -22,7 +22,7 @@ banner = f"""\x1b[0;33m
 \x1b[0;1;3mBy Hippie\x1b[0;33m | \x1b[0;1mhttps://twitter.com/hiippiiie\x1b[0m
 """
 
-def gen_permutations(firstname, lastname):
+def gen_permutations(firstname, lastname, birth_year=None):
     permutations = []
     separators = ['','-','_']
 
@@ -33,6 +33,14 @@ def gen_permutations(firstname, lastname):
         permutations.append(f"{lastname}{separator}{firstname[0]}")
         permutations.append(f"{lastname[0]}{separator}{firstname}")
         permutations.append(f"{firstname}{separator}{lastname[0]}")
+        
+        if birth_year:
+            permutations.append(f"{lastname}{separator}{firstname}{birth_year}")
+            permutations.append(f"{firstname}{separator}{lastname}{birth_year}")
+            permutations.append(f"{firstname[0]}{separator}{lastname}{birth_year}")
+            permutations.append(f"{lastname}{separator}{firstname[0]}{birth_year}")
+            permutations.append(f"{lastname[0]}{separator}{firstname}{birth_year}")
+            permutations.append(f"{firstname}{separator}{lastname[0]}{birth_year}")
     
     return permutations
 
@@ -42,6 +50,7 @@ def parse_args():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     parser.add_argument("-n", "--name", default=None, help='Name of the person (e.g. "John Doe")')
+    parser.add_argument("-b", "--birthyear", default=None, help='Birth year of the person (e.g. "1990")')
     parser.add_argument("-c", "--checkers", default="all", help='Checkers to use (e.g. "gmail, yandex")')
     args = parser.parse_args()
     
@@ -80,7 +89,7 @@ async def main():
             checkers = all_checkers 
         if len(checkers) > 0:
             async with aiohttp.ClientSession() as session:
-                email_permutations = gen_permutations(name_parts[0], name_parts[-1])
+                email_permutations = gen_permutations(name_parts[0], name_parts[-1], args.birthyear)
                 with Progress() as progress:
                     task = progress.add_task("[green]Testing permutations...", total=len(email_permutations))
                     for target in email_permutations:
