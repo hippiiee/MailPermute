@@ -92,6 +92,33 @@ async def gmail(target, req_session_fun, *args, **kwargs) -> Dict:
     await asyncio.sleep(0)
     return result, error
 
+async def posteo(target, req_session_fun, *args, **kwargs) -> Dict:
+    result = {}
+    error = ""
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36',
+        'Referer': 'https://posteo.de/en/signup',
+        'X-Requested-With': 'XMLHttpRequest'}
+
+    try:
+        posteoURL = f"https://posteo.de/users/new/check_username?user%5Busername%5D={target}"
+
+        chkPosteo = await req_session_fun.get(posteoURL, headers=headers, timeout=kwargs.get('timeout', 5))
+
+        async with chkPosteo:
+            if chkPosteo.status == 200:
+                resp = await chkPosteo.text()
+                if resp == "false":
+                    result["Posteo"] = [
+                        f"{target}@posteo.net https://posteo.de/en/help/which-domains-are-available-to-use-as-a-posteo-alias-address",
+                    ]
+
+    except Exception as e:
+        error = str(e)
+
+    return result, error
+
 async def yahoo(target, req_session_fun, *args, **kwargs) -> Dict:
     result = {}
     error = ""
