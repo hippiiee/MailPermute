@@ -48,6 +48,8 @@ options:
   -n NAME, --name NAME  Name of the person (e.g.
                         "John Doe") (default:
                         None)
+  -b BIRTHYEAR, --birthyear BIRTHYEAR
+                        Birth year of the person (e.g. "1990") (default: None)
   -c CHECKERS, --checkers CHECKERS
                         Checkers to use (e.g.
                         "gmail, yandex")
