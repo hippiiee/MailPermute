@@ -11,6 +11,7 @@
 Find valid email from different providers:
   - [x] DuckDuckGo
   - [x] Gmail
+  - [x] Posteo
   - [x] Yahoo
   - [x] Yandex
 
@@ -33,7 +34,7 @@ $ python3 mailpermute.py -h
 888  Y8P  888 .d888888 888 888 888  888 88888888 888     888  888  888 888  888 888   88888888 
 888   "   888 888  888 888 888 888 d88P Y8b.     888     888  888  888 Y88b 888 Y88b. Y8b.     
 888       888 "Y888888 888 888 88888P"   "Y8888  888     888  888  888  "Y88888  "Y888 "Y8888  
-                               888 v1.0                                                       
+                               888 v1.1                                                       
                                888                                                             
                                888                                                             
 By Hippie | https://twitter.com/hiippiiie
